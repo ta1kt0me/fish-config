@@ -17,5 +17,9 @@ begin
         end
     end
 
+    if test -e $fish_config_dir/local.fish
+        source $fish_config_dir/local.fish
+    end
+
     popd
 end
