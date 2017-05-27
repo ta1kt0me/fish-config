@@ -23,3 +23,5 @@ begin
 
     popd
 end
+
+alias pcp='peco | tr -d "\n" | pbcopy'
