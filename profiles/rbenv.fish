@@ -1,1 +1,1 @@
-rbenv init - | source
+string replace -a 'setenv' 'set -x' (rbenv init -) | source
