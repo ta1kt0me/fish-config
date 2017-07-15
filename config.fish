@@ -25,3 +25,4 @@ begin
 end
 
 alias pcp='peco | tr -d "\n" | pbcopy'
+alias gosh='rlwrap gosh'
