@@ -4,5 +4,8 @@ function times -d "Exec argument command for n times"
     for x in (seq $count)
         echo $execution
         eval $execution
+        if test $status -ne 0
+            break
+        end
     end
 end
