@@ -26,3 +26,4 @@ end
 
 alias pcp='peco | tr -d "\n" | pbcopy'
 alias gosh='rlwrap gosh'
+alias ge='git_edit'
