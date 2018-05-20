@@ -1,0 +1,68 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require "json"
+require "fileutils"
+
+BABEL_RC = "./.babelrc"
+
+# setup for base js project
+class BaseProject
+  def self.prepare
+    system("gibo Node >> .gitignore") if system("type gibo")
+    system("git init")
+    system("yarn init -y -s")
+    system("yarn add -s --no-progress babel-preset-env")
+    system("yarn add -s --no-progress --dev babel-cli babel-register mocha")
+
+    File.open(BABEL_RC, "w") { |f| f.write({ presets: [:env] }.to_json) }
+  end
+end
+
+# setup for reactjs project
+class ReactProject
+  def self.prepare
+    new.prepare
+  end
+
+  def prepare
+    install
+    write_babelrc_with_react
+    write_mocha_setting
+  end
+
+  def install
+    system("yarn add -s babel-preset-react react@^16.0.0 react-dom@^16.0.0")
+    system("yarn add -s --dev enzyme react-test-renderer@^16.0.0")
+  end
+
+  private
+
+  def write_babelrc_with_react
+    JSON.parse(IO.read(BABEL_RC), symbolize_names: true).tap do |babelrc|
+      babelrc[:presets] << :react
+      File.open(BABEL_RC, "w") { |f| f.write(babelrc.to_json) }
+    end
+  end
+
+  def write_mocha_setting
+    FileUtils.mkdir_p("test") unless Dir.exist? "test"
+    File.open("./test/mocha.opts", "w") { |f| f.write("--require babel-register") }
+  end
+end
+
+# setup for reactjs v15.5 project
+class React15Project < ReactProject
+  def install
+    system("yarn add -s --no-progress babel-preset-react react@^15.5.0 react-dom@^15.5.0")
+    system("yarn add -s --no-progress --dev enzyme enzyme-adapter-react-15 react-test-renderer@^15.5.0")
+  end
+end
+
+BaseProject.prepare
+
+if ARGV.include?("--react15")
+  React15Project.prepare
+elsif ARGV.include?("--react16")
+  ReactProject.prepare
+end
