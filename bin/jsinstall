@@ -77,7 +77,6 @@ class HtmlProject
         </body>
       </html>
     HTML
-    p html
     File.open("./index.html", "w") { |f| f.write(html) }
   end
 end
