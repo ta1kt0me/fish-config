@@ -59,10 +59,31 @@ class React15Project < ReactProject
   end
 end
 
+class HtmlProject
+  def self.prepare
+    FileUtils.mkdir_p("js") unless Dir.exist? "js"
+    system("touch ./js/index.js");
+    system("touch ./index.html");
+    html = <<~HTML
+      <!doctype html>
+      <html>
+        <head>
+          <title>Sample App</title>
+          <script src="/js/index.js"></script>
+        </head>
+        <body>
+          <div id="root">
+          </div>
+        </body>
+      </html>
+    HTML
+    p html
+    File.open("./index.html", "w") { |f| f.write(html) }
+  end
+end
+
 BaseProject.prepare
 
-if ARGV.include?("--react15")
-  React15Project.prepare
-elsif ARGV.include?("--react16")
-  ReactProject.prepare
-end
+React15Project.prepare if ARGV.include?("--react15")
+ReactProject.prepare   if ARGV.include?("--react16")
+HtmlProject.prepare    if ARGV.include?("--webapp")
