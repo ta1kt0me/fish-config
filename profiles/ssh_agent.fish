@@ -1,5 +1,5 @@
 function start_ssh_agent -d 'start ssh-agent'
-    setenv SSH_ENV $HOME/.ssh/environment
+    setenv SSH_ENV /tmp/environment
 
     if not test -e $SSH_ENV
         ssh-agent -c | sed 's/^echo/#echo/' > $SSH_ENV
