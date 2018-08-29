@@ -1,5 +1,5 @@
 set -x MANPATH "/usr/local/share/fish/man:"
-set -g Z_SCRIPT_PATH /usr/local/opt/z/etc/profile.d/z.sh
+set -g Z_SCRIPT_PATH (git config --get ghq.root)/github.com/rupa/z/z.sh
 
 begin
     set -l source_dirs hooks abbrs profiles
