@@ -1,5 +1,5 @@
 function notify_postexec --on-event fish_postexec
-    if test -n "(command -s terminal-notifier)"
+    if test (command -s terminal-notifier)
         set -l cmd_res $status
         string match -r '^bundle$|bundle install| be |bundle exec|bin' $argv | read match
         string length -q $match
