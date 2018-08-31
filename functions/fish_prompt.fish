@@ -35,11 +35,11 @@ function fish_prompt
     echo -n -s ' ' $normal_color (date "+%H:%M:%S")
     echo -n -s ' ' (_current_path) (_current_git_branch)
 
-    if test -n "(command -s rbenv)"
+    if test (command -s rbenv)
         echo -n -s ' ' $normal_color 'ruby:' (rbenv version-name)
     end
 
-    if test -n "(command -s node)"
+    if test (command -s node)
         echo -n -s ' ' $normal_color 'node:' (node --version)
     end
 
