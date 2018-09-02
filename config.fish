@@ -31,3 +31,7 @@ alias ge='git_edit'
 if not test (command -s tac)
     alias tac='tail -r'
 end
+
+if not test (command -s pbcopy)
+    alias pbcopy='xsel --clipboard --input'
+end
