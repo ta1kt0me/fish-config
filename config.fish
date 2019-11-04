@@ -29,6 +29,7 @@ end
 alias pcp='peco | tr -d "\n" | pbcopy'
 alias gosh='rlwrap gosh'
 alias ge='git_edit'
+alias rw='reg_word'
 
 if not test (command -s tac)
     alias tac='tail -r'
