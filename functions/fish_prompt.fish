@@ -31,8 +31,10 @@ end
 
 function fish_prompt
     set -l normal_color (set_color normal)
+    set -l blue_color (set_color cyan)
 
-    echo -n -s ' ' $normal_color (date "+%H:%M:%S")
+    echo -n -s $blue_color '(' (id -gn) ')'
+    echo -n -s $normal_color (date "+%H:%M:%S")
     echo -n -s ' ' (_current_path) (_current_git_branch)
 
     if test (command -s rbenv)
