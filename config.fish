@@ -32,6 +32,7 @@ alias pcp='peco | tr -d "\n" | pbcopy'
 alias gosh='rlwrap gosh'
 alias ge='git_edit'
 alias rw='reg_word'
+alias awswhoami='aws sts get-caller-identity'
 
 if not test (command -s tac)
     alias tac='tail -r'
