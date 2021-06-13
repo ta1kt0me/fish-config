@@ -7,6 +7,8 @@ function mfa_aws_refresh -d "refresh aws session token"
         return 1
     end
     aws sts get-caller-identity --query "Arn" --output text | sed -e 's/user/mfa/' | read arn
+    echo $arn
+    echo $code
     aws --profile default sts get-session-token --serial-number $arn --token-code $code | read -z -l session_token
 
     echo $session_token | jq -r ".Credentials.Expiration" | read -l expired_at
