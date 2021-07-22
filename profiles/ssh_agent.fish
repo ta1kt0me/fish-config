@@ -6,8 +6,8 @@ function start_ssh_agent -d 'start ssh-agent'
         chmod 600 $SSH_ENV
     end
 
-    . $SSH_ENV > /dev/null ^ /dev/null
-    ssh-add > /dev/null ^ /dev/null
+    . $SSH_ENV > /dev/null 2> /dev/null
+    ssh-add > /dev/null 2> /dev/null
 
     if not test $status -eq '0'
         rm $SSH_ENV
