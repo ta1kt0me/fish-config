@@ -184,9 +184,22 @@ fn main() {
                 };
 
                 let url = if repository.starts_with('/') {
-                    ["https://github.com", &repository].concat()
+                    if !use_ssh {
+                        ["https://github.com", &repository].concat()
+                    } else {
+                        [
+                            "git@github.com:",
+                            &repository.strip_prefix("/").unwrap(),
+                            ".git",
+                        ]
+                        .concat()
+                    }
                 } else {
-                    ["https://github.com/", &repository].concat()
+                    if !use_ssh {
+                        ["https://github.com/", &repository].concat()
+                    } else {
+                        ["git@github.com:", &repository, ".git"].concat()
+                    }
                 };
                 println!("url is {}", &url);
 
