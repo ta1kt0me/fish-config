@@ -1,0 +1,3 @@
+```command
+make release
+```

@@ -1,3 +1,5 @@
+/bin/*
+!/bin/jsinstall
 /local.fish
 /functions/rsvm.fish
 /completions/*.fish
