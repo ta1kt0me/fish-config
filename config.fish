@@ -46,3 +46,7 @@ end
 if test -e ~/.asdf/asdf.fish
     source ~/.asdf/asdf.fish
 end
+
+if test (command -s flatpak)
+    alias wezterm='flatpak run org.wezfurlong.wezterm'
+end
