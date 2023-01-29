@@ -1,5 +1,5 @@
 function _git_status
-    if test -d '.git'
+    if git rev-parse --git-dir > /dev/null 2>&1
         if test (git diff --staged --name-only | wc -l | tr -d ' ') != 0
             echo -n -s (set_color green) '+'
         end
@@ -15,7 +15,7 @@ function _git_status
 end
 
 function _current_git_branch
-    if test -d '.git'
+    if git rev-parse --git-dir > /dev/null 2>&1
         set -l normal_color (set_color normal)
         set -l branch_name (git symbolic-ref --short HEAD; or git show-ref --head -s --abbrev | head -n1)
         echo -n -s $normal_color ':' $branch_name (_git_status) $normal_color ''
