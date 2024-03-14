@@ -1,7 +1,8 @@
 umask 022
-set -x MANPATH "/usr/local/share/fish/man:"
+
 set -g Z_SCRIPT_PATH (git config --get ghq.root)/github.com/rupa/z/z.sh
-set -g PATH $HOME/.local/bin $PATH /usr/local/bin
+fish_add_path -g $HOME/.local/bin /usr/local/bin /opt/homebrew/bin
+set -x MANPATH "$(brew --prefix)/share/fish/man:"
 
 set fish_greeting
 
