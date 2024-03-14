@@ -61,3 +61,9 @@ if test (command -s mise); and test -z $MISE_SHELL
     $HOME/.local/bin/mise activate fish | source
     fish_add_path -g $(mise bin-paths | tr "\n" ":")
 end
+
+# direnv
+type -f direnv > /dev/null
+if test $status -eq 0
+    eval (direnv hook fish)
+end
