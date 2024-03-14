@@ -56,3 +56,8 @@ if test (command -s aws)
     # https://github.com/aws/aws-cli/issues/1079#issuecomment-541997810
     complete --command aws --no-files --arguments '(begin; set --local --export COMP_SHELL fish; set --local --export COMP_LINE (commandline); aws_completer | sed \'s/ $//\'; end)'
 end
+
+if test (command -s mise); and test -z $MISE_SHELL
+    $HOME/.local/bin/mise activate fish | source
+    fish_add_path -g $(mise bin-paths | tr "\n" ":")
+end

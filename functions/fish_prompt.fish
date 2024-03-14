@@ -37,7 +37,9 @@ function fish_prompt
     echo -n -s $normal_color (date "+%H:%M:%S")
     echo -n -s ' ' (_current_path) (_current_git_branch)
 
-    if test (command -s rbenv)
+    if test (command -s mise)
+        echo -n -s ' ' $normal_color 'ruby:' (mise current ruby)
+    else if test (command -s rbenv)
         echo -n -s ' ' $normal_color 'ruby:' (rbenv version-name)
     end
 
