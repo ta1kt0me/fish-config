@@ -1,1 +1,1 @@
-set -x PATH $HOME/.nodebrew/current/bin ./node_modules/.bin $PATH
+fish_add_path -g ./node_modules/.bin

@@ -1,1 +1,1 @@
-set -x PATH (dirname (realpath (status --current-filename)))/../bin $PATH
+fish_add_path (dirname (realpath (status --current-filename)))/../bin

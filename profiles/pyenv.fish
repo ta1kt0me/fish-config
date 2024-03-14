@@ -1,4 +1,6 @@
-set -Ux PYENV_ROOT $HOME/.pyenv
-set -U fish_user_paths $PYENV_ROOT/bin $fish_user_paths
-status is-login; and pyenv init --path | source
-status is-interactive; and pyenv init - | source
+if test -z "$PYENV_ROOT"
+  set -Ux PYENV_ROOT $HOME/.pyenv
+  fish_add_path $PYENV_ROOT/bin
+  status is-login; and pyenv init --path | source
+  status is-interactive; and pyenv init - | source
+end

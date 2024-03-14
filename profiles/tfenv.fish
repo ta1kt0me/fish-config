@@ -1,2 +1,2 @@
 set -x TFENV_ROOT $HOME/.tfenv
-set -x PATH $TFENV_ROOT/bin $PATH
+fish_add_path -g $TFENV_ROOT/bin
