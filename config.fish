@@ -44,7 +44,7 @@ if not test (command -s pbcopy)
     alias pbcopy='xsel --clipboard --input'
 end
 
-if test -e ~/.asdf/asdf.fish
+if test -e ~/.asdf/asdf.fish; and not test (command -s asdf)
     source ~/.asdf/asdf.fish
 end
 
