@@ -1,7 +1,7 @@
 umask 022
 
 set -g Z_SCRIPT_PATH (git config --get ghq.root)/github.com/rupa/z/z.sh
-fish_add_path -g $HOME/.local/bin /usr/local/bin /opt/homebrew/bin
+fish_add_path -gm $HOME/.local/bin /usr/local/bin /opt/homebrew/bin
 set -x MANPATH "$(brew --prefix)/share/fish/man:"
 
 set fish_greeting
@@ -58,13 +58,22 @@ if test (command -s aws)
     complete --command aws --no-files --arguments '(begin; set --local --export COMP_SHELL fish; set --local --export COMP_LINE (commandline); aws_completer | sed \'s/ $//\'; end)'
 end
 
-if test (command -s mise); and test -z $MISE_SHELL
+if test (command -s mise)
     $HOME/.local/bin/mise activate fish | source
-    fish_add_path -g $(mise bin-paths | tr "\n" ":")
+    if string match "vscode" "$TERM_PROGRAM"
+        # NOTE: VSCode tasks do crazy PATH reordering...
+        set -g PATH "$(mise bin-paths | tr "\n" ' ' | string trim | tr ' ' ':')" $PATH
+    else
+        fish_add_path -gm $(mise bin-paths | tr "\n" ":")
+    end
 end
 
 # direnv
 type -f direnv > /dev/null
 if test $status -eq 0
     eval (direnv hook fish)
+    # NOTE: VSCode Terminal does not load .envrc by default. If it is uncommented, it will always load.
+    # if test -n "$(string match -r 'Found RC path' "$(direnv status)")"
+    #     direnv allow
+    # end
 end
